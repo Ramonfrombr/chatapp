@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+
+	<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- CSS Personalizado -->
+	<link rel="stylesheet" href="{{ url_for('static',  filename='estilo.css') }}">
+	
+	<!-- Font Awesome-->
+	<script src="https://use.fontawesome.com/e7993babb1.js"></script>
+
+
+    <!-- Socket IO -->
+	<script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
+
+
+	<script type="text/javascript" charset="utf-8">
+
+	    var socket = io();
+	    
+	    socket.on('connect', function() {
+	        socket.emit('my event', {data: 'I\'m connected!'});
+	    });
+	</script>
+</head>
+<body>
+
+
+
+<div class="container-fluid">
+
+	<div id="navlateral" class="navlateral">
+
+		<a href="javascript:void(0)" id="botaoFecharMenu" class="botaoFechar">&times;</a>
+	  
+		<div class="m-3">
+
+			<form onsubmit="return false">
+
+				<div class="form-group">
+
+					<label class="text-white" for="">Nome de Usuário</label>
+					<input type="text" class="form-control" name="" id="inputNomeUsuario" aria-describedby="helpId" placeholder="">
+				</div>
+				<button id="botaoNomeUsuario" class="btn btn-primary">Salvar nome de usuário</button>
+			</form>
+		</div>
+
+
+		<ul class="m-3" id="listaDeSalas">
+			<li class="linkSala" data-idioma="ingles">English</li>
+			<li class="linkSala" data-idioma="espanhol">Español</li>
+			<li class="linkSala" data-idioma="frances">Français</li>
+			<li class="linkSala" data-idioma="italiano">Italiano</li>
+			<li class="linkSala" data-idioma="portugues">Português</li>
+			<li class="linkSala" data-idioma="alemao">Deutsch</li>
+		</ul>	
+	</div>
+
+	<div id="camada">
+	</div>
+	
+	<div id="interfaceChat">
+
+		<div id="navbar">
+
+            <div id="iconeMenu">
+              <div class="hamburger"></div>
+              <div class="hamburger"></div>
+              <div class="hamburger"></div>
+            </div>
+
+			<span id="nomeDaSala">Sala de Bate Papo	</span>
+        </div>
+		
+
+		<!-- Lista de mensagens e formulário para enviar mensagem -->
+		<div id="chat">
+			
+			<div id="listaMensagens">		
+			</div>
+
+			<!-- onsubmit return false impede página de recarregar-->
+			
+
+			<form id="formMensagem" class="row">
+
+				<div id="inputMensagem" class="col border border-danger">
+					<input id="mensagem" name="mensagem" type="text" class="form-control" autocomplete="off"  placeholder="Digite...">
+				</div>
+
+				<div id="botaoEnviarMensagem" class="col-2 text-center">
+					<button type="submit" id="botao" class="btn btn-primary w-100"><i class="fa fa-paper-plane"></i></button>
+				</div>
+				
+			</form>
+		</div>
+	</div>
+</div>
+
+
+
+
+<!-- Optional JavaScript -->
+<script src="{{ url_for('static',  filename='script.js') }}"></script>
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
