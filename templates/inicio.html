@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>Bate-papo</title>
 
 	<!-- Required meta tags -->
     <meta charset="utf-8">
@@ -16,19 +16,12 @@
 	<!-- Font Awesome-->
 	<script src="https://use.fontawesome.com/e7993babb1.js"></script>
 
+	<!-- Fonte Merienda One-->
+	<link href="https://fonts.googleapis.com/css2?family=Merienda+One&display=swap" rel="stylesheet">
 
     <!-- Socket IO -->
 	<script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js" integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I=" crossorigin="anonymous"></script>
 
-
-	<script type="text/javascript" charset="utf-8">
-
-	    var socket = io();
-	    
-	    socket.on('connect', function() {
-	        socket.emit('my event', {data: 'I\'m connected!'});
-	    });
-	</script>
 </head>
 <body>
 
@@ -36,10 +29,45 @@
 
 <div class="container-fluid">
 
-	<div id="navlateral" class="navlateral">
+
+	
+	<div id="camadaInicio">	
+		<div>
+			<h1 id="headerInicio" class="mb-5">Bem-vindo ao <br> Bate-Papo do <span class="aprendaagora">Aprenda Agora</span></h1>
+			
+			<form id="formAcessoInicio">
+
+				<div class="form-group">
+					<label for="inputNomeUsuarioInicio" class="text-white">Nome de usuário</label>
+					<input type="text" class="form-control" id="inputNomeUsuarioInicio" placeholder="Digite um nome de usuário...">
+				</div>
+
+				<div class="form-group">
+					<label for="" class="text-white">Sala</label>
+
+					<select id="selecaoSala" class="custom-select">
+						<option value="ingles">Inglês</option>
+						<option value="espanhol">Espanhol</option>
+						<option value="frances">Francês</option>
+						<option value="portugues">Português</option>
+					</select>
+				</div>
+				
+				<div id="divBotaoEntrarInicio">
+					<button type="button" class="btn btn-success" id="botaoEntrarInicio">Entrar</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
+
+	
+	
+	
+	<div id="menulateral" class="menulateral">
 
 		<a href="javascript:void(0)" id="botaoFecharMenu" class="botaoFechar">&times;</a>
-	  
+		
 		<div class="m-3">
 
 			<form onsubmit="return false">
@@ -63,46 +91,41 @@
 			<li class="linkSala" data-idioma="alemao">Deutsch</li>
 		</ul>	
 	</div>
-
-	<div id="camada">
-	</div>
 	
 	<div id="interfaceChat">
 
 		<div id="navbar">
 
-            <div id="iconeMenu">
-              <div class="hamburger"></div>
-              <div class="hamburger"></div>
-              <div class="hamburger"></div>
-            </div>
+			<div id="iconeMenu">
+				<div class="hamburger"></div>
+				<div class="hamburger"></div>
+				<div class="hamburger"></div>
+			</div>
 
-			<span id="nomeDaSala">Sala de Bate Papo	</span>
-        </div>
+			<span id="nomeDaSala">Sala de Bate Papo</span>
+		</div>
 		
-
 		<!-- Lista de mensagens e formulário para enviar mensagem -->
 		<div id="chat">
 			
 			<div id="listaMensagens">		
 			</div>
-
-			<!-- onsubmit return false impede página de recarregar-->
-			
-
-			<form id="formMensagem" class="row">
-
-				<div id="inputMensagem" class="col border border-danger">
-					<input id="mensagem" name="mensagem" type="text" class="form-control" autocomplete="off"  placeholder="Digite...">
-				</div>
-
-				<div id="botaoEnviarMensagem" class="col-2 text-center">
-					<button type="submit" id="botao" class="btn btn-primary w-100"><i class="fa fa-paper-plane"></i></button>
-				</div>
-				
-			</form>
 		</div>
+
+		<!-- onsubmit return false impede página de recarregar-->
+		<form id="formMensagem" class="row container-fluid">
+
+			<div id="divInputMensagem" class="col-10">
+				<input id="inputMensagem" name="mensagem" type="text" class="form-control" autocomplete="off"  placeholder="Digite...">
+			</div>
+
+			<div id="divBotaoEnviarMensagem" class="col-2 text-center">
+				<button type="submit" id="botaoEnviarMensagem" class="btn btn-primary w-100"><i class="fa fa-paper-plane"></i></button>
+			</div>
+			
+		</form>
 	</div>
+
 </div>
 
 

@@ -1,9 +1,9 @@
 """
 
-Lista de Implementações e Funcionalidades
+Lista de Funcionalidades
 
 
-[ ] - Exibir nome de usuário. Quando um usuário visita o site pea primeira vez, eles devem informar
+[ ] - Exibir nome de usuário. Quando um usuário visita o site pela primeira vez, eles devem informar
 um nome que será exibido com cada mensagem que o usuário enviar.
 Se o usuário fechar a página e voltar mais tarde, o nome de usuário deve ser lembrado.
 
@@ -36,6 +36,9 @@ Toque pessoal
 
 [ ] - Habilitar troca de mensagens privadas entre dois usuários.
 
+[ ] - Livro de frases sugeridas de acordo com a última mensagem recebida ou mensagem sendo escrita pelo usuário
+
+
 
 """
 
@@ -44,7 +47,7 @@ Toque pessoal
 
 import os
 
-from flask import Flask, render_template
+from flask import Flask, render_template, jsonify
 from flask_socketio import SocketIO, emit
 
 app = Flask(__name__)
@@ -53,7 +56,10 @@ app.config["TEMPLATES_AUTO_RELOAD"] = True
 socketio = SocketIO(app)
 
 salas = {
-    'sala01': []
+    'ingles': [],
+    'espanhol': [],
+    'frances': [],
+    'portugues': []
 }
 
 
@@ -62,10 +68,41 @@ salas = {
 def inicio():
     return render_template("inicio.html")
 
+
+# Confirma conexão
 @socketio.on('socket conectado')
 def handle_my_custom_event():
     print("Socket conectado.")
 
+
+@socketio.on('pedir mensagens')
+def pedir_mensagens(sala):
+
+    # Seleciona a sala
+    sala = sala['sala']
+
+    # Array de mensagens que será enviado para o cliente
+    mensagens = []
+
+    #
+    for mensagem in salas[sala]:
+
+        #
+        usuario = mensagem['usuario']
+        conteudo = mensagem['mensagem']
+        dataMensagem = mensagem['dataMensagem']
+
+        #
+        mensagens.append({'usuario': usuario, 'mensagem': conteudo, 'dataMensagem': dataMensagem})
+
+    for mensagem in mensagens:
+        print(mensagem)
+
+    print(mensagens)
+
+    # Envia array de mensagens
+    emit('carregar mensagens', mensagens)
+    
 
 @socketio.on('enviar mensagem')
 def enviar_mensagem(dados):
